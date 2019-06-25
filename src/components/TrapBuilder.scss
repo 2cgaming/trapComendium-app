@@ -1,0 +1,17 @@
+.trap_console {
+  border: 1px solid black;
+  font-size: 1.2em;
+}
+
+.navbar {
+  width: 80%;
+  margin: 20px auto;
+  justify-content: space-around;
+  text-align: center;
+  * {
+    width: 5em;
+  }
+  .display {
+    background: #f8f8f8;;
+  }
+}

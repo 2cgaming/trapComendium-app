@@ -10,12 +10,12 @@ $secondary-color: #800000;
   height: 100%;
 }
 
-@mixin row {
+.row {
   display: flex;
   flex-direction: row;
 }
 
-@mixin col {
+.col {
   display: flex;
   flex-direction: column;
 }
