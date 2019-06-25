@@ -1,7 +1,7 @@
 import React from 'react';
-import './Navbar.scss';
+import './StatBar.scss';
 
-export default function Navbar({handleSelect, trap}) {
+export default function StatBar({handleSelect, trap}) {
   const {xp, cost} = trap;
   return (
   <div className="navbar row">

@@ -1,6 +1,6 @@
 import React from 'react';
-import Navbar from './Navbar.jsx';
-import styles from './TrapBuilder.scss'
+import StatBar from './StatBar.jsx/index.js';
+import styles from './TrapBuilder.scss';
 
 export default class TrapBuilder extends React.Component {
   constructor(props) {
@@ -49,7 +49,7 @@ export default class TrapBuilder extends React.Component {
   render() {
     return (
       <div className="trap_console">
-        <Navbar trap={this.state.trap} handleSelect={this.handleTierSelection}/>
+        <StatBar trap={this.state.trap} handleSelect={this.handleTierSelection}/>
         <div className="options">
         </div>
       </div>
