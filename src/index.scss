@@ -1,0 +1,21 @@
+@import 'normalize';
+
+$fonts: 1em -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+$black: #000000;
+$secondary-color: #800000;
+
+#root {
+  font: $fonts;
+  width: 100%;
+  height: 100%;
+}
+
+@mixin row {
+  display: flex;
+  flex-direction: row;
+}
+
+@mixin col {
+  display: flex;
+  flex-direction: column;
+}
