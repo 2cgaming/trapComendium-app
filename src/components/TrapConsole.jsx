@@ -1,58 +1,44 @@
 import React from 'react';
-import StatBar from './StatBar.jsx/index.js';
-import styles from './TrapBuilder.scss';
+import style from 'styled-components';
+import StatBar from './StatBar.jsx';
+import TrapComponent from './TrapComponent.jsx';
 
-export default class TrapBuilder extends React.Component {
+const Console = style.div`
+  min-width: 650px;
+  max-width: 1200px;
+  font-size: 1.2em;
+  margin: auto;
+`;
+
+export default class TrapConsole extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      trap: {
-        tier: 1,
-        cost: 1,
-        xp: 100,
-        mitigation: {
-          perception: 15,
-          disarm: 15,
-          upgrades: []
-          // added cost is in upgrades
-        },
-        trigger: {
-          type: 1,
-          // added cost is in type and upgrades
-          upgrades:[]
-        },
-        targets: {
-          type: 1,
-          upgrades:[]
-        },
-        components: [],
-        componentUpgrades: [],
-      },
-      traps_store:[],
-    };
-    this.handleTierSelection = this.handleTierSelection.bind(this);
-  }
-
-  handleTierSelection(e) {
-    const {value} = e.target
-    this.setState(state => {
-      state.trap.tier = value;
-      return state;
-    }) 
-  }
-
-  requestTrapAttributes() {
-    // GET request for trap triggers, targets, upgrades and components
-    // 
+    this.state = props.state;
   }
 
   render() {
+    const {stats, components} = this.state;
+
     return (
-      <div className="trap_console">
-        <StatBar trap={this.state.trap} handleSelect={this.handleTierSelection}/>
-        <div className="options">
+      <Console>
+        <StatBar 
+          stats={stats}
+        />
+        <div className="options row">
+          <div className="col">
+            {components.map(component => {
+              return <TrapComponent component={component} />
+            })}
+            <TrapComponent />
+          </div>
         </div>
-      </div>
+      </Console>
     )
   }
 }
+
+// in order:
+// - mitigation upgrades
+// - triggers
+// - targets
+// - effects

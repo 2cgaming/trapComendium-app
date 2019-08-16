@@ -1,0 +1,24 @@
+
+main {
+  
+  .options {
+    display: flex;
+    flex-flow: wrap;
+    min-height: 40vh;
+    div.col {
+      width: 50%;
+      padding: 10px;
+      align-content: center;
+      border: none;
+    }
+  }
+}
+
+#modal_menu {
+  height: 0px;
+  width: 50%;
+  background: rgba(211, 211, 211, 0.85);
+  border-radius: 20px;
+  // z-index: 1000;
+  transition-duration: 500ms;
+}
