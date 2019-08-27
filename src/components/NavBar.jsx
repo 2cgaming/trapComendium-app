@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import defaultStyles from '../css.config.json';
+import defaultStyles from '../css.theme.json';
 
 const Button = styled.button`
   padding: 0.3em 5px;
@@ -30,6 +30,7 @@ const Nav = styled.nav`
   padding: 10px 20px;
 `;
 
+// will be anchor tags
 export default () => (
   <Nav className="row">
     <Button>
@@ -39,7 +40,10 @@ export default () => (
       Home
     </Button>
     <Button>
-      ETC.
+      Books
+    </Button>
+    <Button>
+      Admin
     </Button>
   </Nav>
 );

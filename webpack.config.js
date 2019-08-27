@@ -9,6 +9,7 @@ module.exports = {
     compress: true,
     contentBase: path.join(__dirname, 'dist')
   },
+  entry: ['@babel/polyfill', './src/index.js'],
   module: {
     rules: [
       {
