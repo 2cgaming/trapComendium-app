@@ -1,26 +1,59 @@
 import React from 'react';
 import style from 'styled-components';
+import {connect} from 'react-redux';
+import {actions} from '../store';
 
-const Sidebar = style.div`
-  width: 25%;
-  max-width: 280px;
-  background-color: #9ea1ee30;
+const Option = style.p`
+  padding: 10px 15px;
+  margin: 0.5rem 1rem;
+  background: white;
+  border: 3px solid black;
+  border-radius: 5px;
+  font-size: 1.3rem;
+  font-family: var(--fonts);
+  text-align: center;
+  &.focused {
+    border-color: var(--primary-color);
+    background: var(--primary-color);
+    color: white;
+  }
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
-export default () => {
-  return (
-    <Sidebar>
-      <p> hello world, I am Mr. Sidebar</p>
-      {/* <Components data={mitigation} type='mitigation'/>
-      <Components data={trigger} type='trigger'/>
-      <Components data={target} type='target'/>
-      <Components data={component} type='component'/>
-      <div>
-        Finalize Trap
-      </div> */}
-    </Sidebar>
-  )
-}
+const Sidebar = style.div`
+  width: fit-content;
+  background-color: #9ea1ee30;
+  height: fill-available;
+`;
+
+const SidebarComponent = ({focus, page, updatePage}) => (
+  <Sidebar id="sidebar" className="col">
+    <Option className={focus === 'user_traps' ? 'focused' : null}
+      onClick={(e) => console.log('Going to user traps')}>
+        My Traps
+    </Option>
+    <Option className={focus === 'create' ? 'focused' : null}
+      onClick={(e) => console.log('Going to create trap')}>
+      Create New Trap</Option>
+    <Option className={focus === 'something' ? 'focused' : null}
+      onClick={(e) => console.log('Going to... do something')}
+        >Something Else</Option>
+    <Option>Focus: {focus}<br/>Page: {page}</Option>
+  </Sidebar>
+);
+
+const mapStateToProps = ({focus, page}) => ({focus, page});
+
+const mapDispatchToProps = (dispatch) => ({
+  updatePage: (page) => {
+    dispatch(actions.handlePage(page));
+  }
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(SidebarComponent);
+
 /*
 
   // updateStatsFromCost() {
@@ -40,31 +73,3 @@ export default () => {
   //   })
   // }
 */
-
-
-/*
-<div className="row">
-        <div className="trap_tier">
-          Tier
-          <span className="tier_count display">{tier}</span>
-        </div>
-        <div className="trap_cost">
-          Cost
-          <span className="cost_count display">{cost}</span>
-        </div>
-        <div className="trap_xp">
-          XP
-          <span className="xp_count display">{xp}</span>
-        </div>
-      </div>
-      <div className="row">
-        <div className="trap_perception_dc">
-          Perception DC
-          <span className="perception_dc display">{perceptionDC}</span>
-        </div>
-        <div className="trap_display_dc">
-          Disarm DC
-          <span className="perception_dc display">{disarmDC}</span>
-        </div>
-      </div>
-      */

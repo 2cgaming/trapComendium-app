@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import style from 'styled-components';
 
-import {Item, Cost} from './';
+import {Div} from './';
 
 const UpgradeWrapper = style.div`
   background: white;
@@ -10,16 +10,16 @@ const UpgradeWrapper = style.div`
   }
 `;
 
-const UpgradeItem = style(Item)`
+const UpgradeItem = style(Div)`
   border: none;
   border-top: 1px solid gray;
-  border-radius: none;
+  border-radius: 0px;
 `
 
 const Upgrade = ({upgrade}) => (
   <UpgradeItem>
     <h3>{upgrade.name}</h3>
-    <Cost>{upgrade.cost}</Cost>
+    <h4><strong>Cost: </strong>{upgrade.cost}</h4>
     <p>{upgrade.text}</p>
     <input type="checkbox" />
   </UpgradeItem>

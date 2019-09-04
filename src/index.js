@@ -1,7 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './App.jsx';
 import {Provider} from 'react-redux';
+
+import App from './App.jsx';
 import configureStore from './store';
 import {requestOptions} from './helpers/requests';
 import {parseData} from './helpers/parseData';

@@ -1,35 +1,31 @@
 import React from 'react';
 import style from 'styled-components';
 import {connect} from 'react-redux';
+import {BrowserRouter as Router, Route, Link} from "react-router-dom";
 import Sidebar from './components/Sidebar.jsx';
-import Session from './components/DisplaySession.jsx';
-import Components from './components/DisplayComponents.jsx'
+import SessionView from './components/CreateTrap.jsx';
+import ItemMenu from './components/DisplayComponents.jsx';
 
 const mapStateToProps = ({focus, page}) => ({focus, page});
 
-const Console = style.div`
-  width: 75%;
-  font-size: 1.2em;
-`;
-
-
-function App({focus, page, session, options}) {
-  console.log('creating App');
-  if (page === 1) {
-    return (
-      <div>
-        <Sidebar />
-        <Session data={session} />
-      </div>
-    )
-  } else if (page === 2) {
-    return (
-      <div>
-        <Sidebar />
-        <Components data={options[focus]} type={focus} />
-      </div>
-    )
+function App({focus, page, session}) {
+  let element;
+  switch (focus) {
+    case 'create' :
+      if (page === 1) {
+        element = <SessionView />;
+      } else if (page === 2) {
+        element = <ItemMenu />;
+      }
+      break;
   }
+  
+  return (
+    <div className="row">
+      <Sidebar/>
+      {element}
+    </div>
+  )
 }
 
 export default connect(mapStateToProps)(App);

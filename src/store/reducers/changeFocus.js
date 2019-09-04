@@ -5,7 +5,7 @@
  * @return {Object[]}
  */
 export default function focusReducer(
-  state = '', {type, focus}
+  state = 'create', {type, focus}
 ) {
   return type === 'CHANGE_FOCUS' ? focus : state;
 }

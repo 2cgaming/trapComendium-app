@@ -1,25 +1,46 @@
 import React, {useState} from 'react';
 import style from 'styled-components';
+import {connect} from 'react-redux';
+import {actions} from '../store';
 
-import {TrapItem as Item, ModalItem} from './Items';
+import {MenuItem, ModalItem, Console, ReturnButton} from './Items';
 import {Modal} from './Items';
 
 
-export default function DisplayComponents({data, type, updatePage}) {
+const mapStateToProps = ({focus, options}) => ({
+  data: options[focus],
+  type: focus
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  updatePage: (num) => {
+    dispatch(actions.handlePage(num));
+  }
+})
+
+const FlexBox = style.div`
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+`;
+
+export function DisplayComponents({data, type, updatePage}) {
   let [menuFocus, changeFocus] = useState();
   return (
-  <div>
+  <Console>
     {menuFocus !== undefined
       ? (<Modal
         closeModal={() => changeFocus(undefined)}
         element={<ModalItem item={data[menuFocus]} type={type}/>}
         />)
       : null}
-    <button style={{border: "1px solid pink"}} type='button' onClick={() => updatePage(1)}>
-      ⬅︎ go back
-    </button>
-    {Object.values(data).map(item => (
-      <Item key={item.id} item={item} type={type} changeFocus={changeFocus}/>
-    ))}
-  </div>)
+    <ReturnButton onClick={() => updatePage(1)} >⬅︎</ReturnButton>
+    <FlexBox>
+      {Object.values(data).map(item => (
+        <MenuItem key={item.id} item={item} type={type} changeFocus={changeFocus}/>
+      ))}
+    </FlexBox>
+  </Console>)
 }
+
+export default connect(mapStateToProps, mapDispatchToProps)(DisplayComponents);

@@ -4,7 +4,9 @@ export default {
       id: 1,
       name: 'Hard to Find',
       cost: 2,
-      text: 'blah blah blah'
+      text: `Duis in egestas enim, nec consequat nisi. Maecenas vitae felis ac neque ullamcorper congue. Integer tincidunt enim et auctor rutrum. Donec mollis porta libero sit amet vehicula. Sed tempus ante ligula, eget posuere tortor tristique a. Pellentesque facilisis risus eget magna tristique placerat. Integer cursus non sem eu euismod. Donec nunc dolor, molestie aliquam lacus a, pulvinar semper ipsum.
+
+      Proin vitae tempor ligula. Fusce dui erat, hendrerit porttitor nulla at, porttitor placerat diam. Sed imperdiet eu quam et efficitur. Morbi consectetur sagittis sapien sit amet faucibus. Maecenas at purus tortor. Nullam quis lacinia nisi, eget cursus diam. Cras mauris magna, interdum eu pulvinar vel, facilisis quis lectus. Nunc ultricies nisi ac diam pulvinar imperdiet.`
     },
     {
       id: 2,
