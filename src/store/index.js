@@ -1,22 +1,12 @@
-import {createStore, applyMiddleware} from 'redux';
+import {createStore, applyMiddleware, compose} from 'redux';
 import thunk from 'redux-thunk';
-import {combineReducers} from 'redux';
+import {createBrowserHistory} from 'history';
+import {routerMiddleware} from 'connected-react-router';
 
-import session from './reducers/changeSession';
-import focus from './reducers/changeFocus';
-import page from './reducers/changePage';
-import options from './reducers/changeOptions';
-
+import createRootReducer from './rootReducer';
 import handleSession from './actions/handleSessionChange';
 import handleFocus from './actions/handleFocusChange';
 import handlePage from './actions/handlePageChange';
-
-const reducer = combineReducers({
-  session,
-  focus,
-  options,
-  page
-});
 
 const actions = {
   handleFocus,
@@ -24,9 +14,25 @@ const actions = {
   handlePage
 }
 
-export default function configureStore(options) {
-  return createStore(reducer, {options}, applyMiddleware(thunk))
+const history = createBrowserHistory({
+  basename: '/trapcompendium'
+});
+
+export default function configureStore(components, upgrades) {
+  return createStore(
+    createRootReducer(history),
+    {components,upgrades},
+    compose(
+      applyMiddleware(
+        thunk,
+        routerMiddleware(history)
+      )
+    )
+  )
 };
 
-export {actions};
+export {
+  history,
+  actions
+};
 

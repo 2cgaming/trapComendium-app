@@ -1,11 +1,11 @@
 /**
- * Changes the user view
+ * Adds Upgrades to state
  * @param {Object[]} state current display of the application
  * @param {Object} event event received containing new window type
  * @return {Object[]}
  */
-export default function focusReducer(
-  state = 'create', {type, focus}
+export default function upgradesReducer(
+  state = [], {type, upgrades}
 ) {
-  return type === 'CHANGE_FOCUS' ? focus : state;
+  return type === 'ADD_UPGRADES' ? upgrades : state;
 }
