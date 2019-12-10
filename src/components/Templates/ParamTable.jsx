@@ -1,24 +1,6 @@
 import React from 'react';
 import style from 'styled-components';
 
-const Table = style.table`
-  font-size: 0.9em;
-  border-collapse: collapse;
-  text-align: center;
-  margin: 1em auto 0 auto;
-  tbody tr:nth-child(odd) {
-    background: #fdffd9;
-  }
-  thead {
-    background: lightgray;
-  }
-  * {
-    padding: 5px;
-    border: 1px solid darkgray;
-  }
-  
-`;
-
 const ComponentTable = ({params}) => {
   let rows = [];
   let headers = Object.keys(params);
@@ -53,5 +35,24 @@ const ComponentTable = ({params}) => {
     </Table>
   )
 }
+
+const Table = style.table`
+  font-size: 0.9em;
+  border-collapse: collapse;
+  text-align: center;
+  margin: 1em auto 0 auto;
+  tbody tr:nth-child(odd) {
+    background: #fdffd9;
+  }
+  thead {
+    background: lightgray;
+  }
+  * {
+    padding: 5px;
+    border: 1px solid darkgray;
+  }
+  
+`;
+
 
 export {ComponentTable};

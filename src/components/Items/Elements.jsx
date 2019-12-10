@@ -1,5 +1,6 @@
 import React from 'react';
 import style from 'styled-components';
+import {BrowserRouter as Link} from 'react-router-dom';
 
 const Div = style.div`
   padding: 5px;
@@ -24,14 +25,12 @@ const HoverDiv = style.div`
   }
 `;
 
-const Console = style.div`
-  width: 80%;
-  font-size: 1.2em;
-  padding: 20px;
+const NoUnderLink = style(Link)`
+  text-decoration: none;
 `;
 
 export {
   Div,
-  Console,
   HoverDiv,
+  NoUnderLink,
 }

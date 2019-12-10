@@ -1,23 +1,23 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {Provider} from 'react-redux';
+import {ConnectedRouter} from 'connected-react-router';
 
 import App from './App.jsx';
-import configureStore from './store';
-import {requestOptions} from './helpers/requests';
-import {parseData} from './helpers/parseData';
+import configureStore, {history} from './store';
+import {fetchData} from './helpers/requests';
 
-(function() {
-  requestOptions().then(data => {
-    
-    let options = parseData(data);
-    const store = configureStore(options);
 
-    ReactDOM.render(
-      <Provider store={store}>
+
+fetchData().then(data => {
+  const store = configureStore(... data);
+
+  ReactDOM.render(
+    <Provider store={store}>
+      <ConnectedRouter history={history}>
         <App />
-      </Provider>,
-      document.getElementById(process.env.app_root || 'root')
-    );
-  })
-})();
+      </ConnectedRouter>
+    </Provider>,
+    document.getElementById(process.env.app_root || 'root')
+  );
+})

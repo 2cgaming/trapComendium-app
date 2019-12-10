@@ -2,11 +2,11 @@ import React, {useState} from 'react';
 import {connect} from 'react-redux';
 import style from 'styled-components';
 
-import {actions} from '../store';
+import {actions} from '../../store';
 
-import {Console} from './Items';
-import {Trigger, Target, Component} from './Items/DisplayItems';
-import {AddButton} from './Items/Buttons.jsx';
+import {Console} from '../Items';
+import {Trigger, Target, Component} from '../Items/DisplayItems';
+import {AddButton} from '../Items/Buttons.jsx';
 
 let SessionForm = style.div`
   .row, .col {
@@ -16,14 +16,14 @@ let SessionForm = style.div`
 
 const SessionDisplay = ({session, addItem}) => {
   let {cost} = session;
-  let [title, updateTitle] = useState(session.title);
+  let [name, updateName] = useState(session.name);
   let [description, updateDescription] = useState(session.description);
 
   return (
     <Console>
       <SessionForm id="session_form">
         <div className="row" style={{justifyContent: "space-between"}}>
-          <input width="50%" placeholder="Trap Title" type="text" id="session_title" defaultValue={title} onChange={e=> updateTitle(e.target.value)}/>
+          <input width="50%" placeholder="Trap Name" type="text" id="name" defaultValue={name} onChange={e=> updateName(e.target.value)}/>
           <div className="row">
             <h3>Tier: {calculateTierFromCost(cost)}</h3>
             <h3>Points: {calculatePointsFromCost(cost)}</h3>
