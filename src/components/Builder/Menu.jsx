@@ -9,7 +9,7 @@ import {SessionDisplay} from './SessionDisplay.jsx';
 
 /**BuilderMenu displays prompts for adding trap components and a display for 
 the components already added*/
-export const BuilderMenu = ({session, match}) => {
+export const BuildMenu = ({session, match}) => {
   const {triggers, targets, effects} = session;
   const isComplete = triggers.length && targets.length && effects.length;
   return (
@@ -43,4 +43,4 @@ const Button = style(NavButton)`
 
 const mapStateToProps = ({session}) => ({session});
 
-export default connect(mapStateToProps)(BuilderMenu);
+export default connect(mapStateToProps)(BuildMenu);
