@@ -5,9 +5,7 @@ import {ConnectedRouter} from 'connected-react-router';
 
 import App from './App.jsx';
 import configureStore, {history} from './store';
-import {fetchData} from './helpers/requests';
-
-
+import {fetchData} from './requests/requests';
 
 fetchData().then(data => {
   const store = configureStore(... data);

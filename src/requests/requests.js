@@ -1,11 +1,11 @@
-//import dummyData from './dummydata';
 import axios from 'axios';
 
 async function fetchData() {
   var components = localStorage.getItem('trap_compendium_components');
+  var traps = localStorage.getItem('trap_compendium_traps');
 
   if (components === null) {
-    console.log('unable to find components')
+    console.log('unable to find local components')
     components = await fetchComponents();
     JSON.stringify(components)
     localStorage.setItem('trap_compendium_components', JSON.stringify(components));
@@ -15,13 +15,26 @@ async function fetchData() {
 
   var upgrades = localStorage.getItem('trap_compendium_upgrades');
   if (upgrades === null) {
+    console.log('unable to find local upgrades')
     upgrades = await fetchUpgrades();
     JSON.stringify(upgrades)
     localStorage.setItem('trap_compendium_upgrades', JSON.stringify(upgrades));
   } else {
     upgrades = JSON.parse(upgrades)
   }
-  return [components, upgrades];
+
+  var traps = localStorage.getItem('trap_compendium_traps');
+  if (traps === null) {
+    console.log('unable to find local traps');
+    /* not implemented
+    traps = await fetchTraps();
+    JSON.stringify(components)*/
+    traps = [];
+    localStorage.setItem('trap_compendium_traps', JSON.stringify(traps));
+  } else {
+    traps = JSON.parse(traps)
+  }
+  return [components, upgrades, traps];
 }
 
 async function fetchComponents() {
@@ -30,7 +43,7 @@ async function fetchComponents() {
       return res.data;
     } else {
       console.log("error querying component data from server");
-      // render an error of some kind
+      return null;
     }
   })
 }
@@ -41,10 +54,21 @@ async function fetchUpgrades() {
       return res.data;
     } else {
       console.log("error querying upgrade data from server");
-      // render an error of some kind
+      return null;
     }
   })
 }
+
+/* async function fetchUpgrades() {
+  return axios.get('/api/tc/upgrades').then(res => {
+    if (res.status === 200) {
+      return res.data;
+    } else {
+      console.log("error querying upgrade data from server");
+      return null;
+    }
+  })
+}*/
 
 export {
   fetchData,
