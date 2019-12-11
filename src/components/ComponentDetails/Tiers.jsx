@@ -1,19 +1,17 @@
 import React from 'react';
 import style from 'styled-components';
 
-const ComponentTable = ({params}) => {
+export const EffectTierTable = ({tiers}) => {
   let rows = [];
-  let headers = Object.keys(params);
+  let headers = Object.keys(tiers);
   headers.filter(val => val !== 'COST');
   headers.push('COST');
 
   for (let i = 0; i < 7; i++) {
     let row = [i+1];
     for (let column of headers) {
-      console.log(column);
-      row.push(params[column][i])
+      row.push(tiers[column][i])
     }
-    console.log(row);
     rows.push(row);
   }
   headers.unshift('TIER');
@@ -53,6 +51,3 @@ const Table = style.table`
   }
   
 `;
-
-
-export {ComponentTable};

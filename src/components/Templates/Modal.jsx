@@ -22,7 +22,6 @@ export const Wrapper = style.div`
 
 function eventHandler(history) {
   return function(e) {
-    //console.log(e.target, e.currentTarget)
     if (e.target === e.currentTarget) {
       history.goBack();
     }
