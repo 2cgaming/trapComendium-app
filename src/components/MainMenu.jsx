@@ -1,15 +1,18 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {Link} from 'react-router-dom'
+import {Link} from 'react-router-dom';
 
 import {GrayButton} from './Templates/Buttons.jsx'
 
 const UserTrapDisplay = ({match, traps}) => (
-  <div style={{paddingTop: '10px'}}>
-    {traps.map(trap => <TrapSmall trap={trap}/>)}
+  <div>
+    {traps.length > 0
+      ? traps.map(trap => <TrapSmall trap={trap}/>)
+      : <h2 style={{textAlign:'center', padding: '50px 0'}}>Build your first trap!</h2>}
     <GrayLink text={'Build New Trap +'} dest={match.url + 'build'}/>
   </div>
 );
+
 
 const TrapSmall = ({trap}) => (
   <div className="col">

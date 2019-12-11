@@ -4,8 +4,8 @@ import {BrowserRouter as Router,
   Route,
   Switch
 } from "react-router-dom";
-import BuildMenu from './components/Builder/Menu.jsx';
-import ComponentMenu from './components/Builder/ItemMenu.jsx';
+import BuildMenu from './components/BuildMenu.jsx';
+import ComponentMenu from './components/Builder/ComponentMenu.jsx';
 import MainMenu from './components/MainMenu.jsx';
 
 const App = () => (
@@ -15,6 +15,7 @@ const App = () => (
         <Route exact path='/build' component={BuildMenu}/>
         <Route path="/build/:item_type" component={ComponentMenu}/>
         <Route path='/' component={MainMenu}/>
+        {/* Route for focusing/editing on a built trap */}
       </Switch>
     </Main>
   </div>
@@ -22,6 +23,7 @@ const App = () => (
 
 const Main = style.div`
   width: 100%;
+  padding: 4%;
   min-height: 80vh;
 `;
 
