@@ -12,8 +12,5 @@ main, header, footer, ol, ul, li {
   /* font-family: Lato, Arial, Helvetica, sans-serif; */
   font-weight: 1;
   font-size: 1rem;
+  color: black;
   box-sizing: border-box;}
-
-body {
-	font-size: 1rem;
-}

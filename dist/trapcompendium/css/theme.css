@@ -4,6 +4,7 @@
   --background-color: #9ea1ee30;
   --sidebar-color: #9ea1ee30;
   --font: Luminari serif, Arial sans-serif;
+  --font-accent: Metamorphous;
   --shadow: -1px -1px 2px #000,
     1px -1px 2px #000,
     -1px 1px 2px #000,
@@ -58,11 +59,12 @@ h5 {
 }
 
 p {
-  font-size: 1.5rem
+  font-size: 1.5rem;
+  font-family: var(--font);
 }
 
 body {
-  font-family: Metamorphous;
+  font-family: var(--fonts);
   width: 100%;
   min-height: 100vh;
 }
