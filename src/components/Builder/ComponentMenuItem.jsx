@@ -3,14 +3,15 @@ import style from 'styled-components';
 import {Link} from 'react-router-dom';
 
 import {Button} from '../Templates/Buttons.jsx';
+import {Cost} from '../Templates/TextFields.jsx';
 
 export const ComponentMenuItem = ({item, match}) => {
-  var {cost, _id, name, text} = item;
+  var {cost, id, name, text} = item;
   return (
-    <ComponentWrapper key={_id}>
-      <Link to={match.url + "/" + _id}>
+    <ComponentWrapper key={id}>
+      <Link to={match.url + "/" + id}>
         <Name>{name}</Name>
-        {cost !== undefined ? <h4><strong>Cost:</strong> {item.cost}</h4> : null}
+        <Cost cost={cost}/>
         <TextBox>{text}</TextBox>
         <FadeOut/>
       </Link>

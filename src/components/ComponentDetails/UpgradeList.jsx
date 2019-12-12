@@ -9,7 +9,7 @@ export const UpgradeList = ({upgrades, ...props}) => (
     <h4>Upgrades</h4>
     {upgrades.map(upgrade => (
       <Upgrade 
-        key={`upgrade_${upgrade._id}`}
+        key={`upgrade_${upgrade.id}`}
         upgrade={upgrade}
         {...props}/>
     ))}
@@ -27,19 +27,13 @@ const UpgradeListWrapper = style.div`
   label {
     font-size: inherit;
   }
-  input {
-    border: 2px solid gray;
-    padding-left: 4px;
-    font-family: inherit;
-    font-size: inherit;
-  }
 `;
 
 const mapStateToProps = ({upgrades}, props) => {
   const {item_id, type} = props;
   const filter = upgrade => {
     if (upgrade.type === type) {
-      return upgrade.componentID === null || upgrade._id == item_id;
+      return upgrade.component_id === undefined || upgrade.component_id == item_id;
     }
     return false;
   };

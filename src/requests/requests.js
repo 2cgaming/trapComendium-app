@@ -1,4 +1,5 @@
 import axios from 'axios';
+import {parseTierValues} from './parseTierValues';
 
 async function fetchData() {
   var components = localStorage.getItem('trap_compendium_components');
@@ -7,6 +8,7 @@ async function fetchData() {
   if (components === null) {
     console.log('unable to find local components')
     components = await fetchComponents();
+    components = parseTierValues(components);
     JSON.stringify(components)
     localStorage.setItem('trap_compendium_components', JSON.stringify(components));
   } else {
@@ -32,6 +34,7 @@ async function fetchData() {
     traps = [];
     localStorage.setItem('trap_compendium_traps', JSON.stringify(traps));
   } else {
+    console.log(traps);
     traps = JSON.parse(traps)
   }
   return [components, upgrades, traps];

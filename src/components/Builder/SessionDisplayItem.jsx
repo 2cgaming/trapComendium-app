@@ -1,34 +1,51 @@
 import React from 'react';
 import style from 'styled-components'
 
-import {NavButton} from '../Templates/Buttons.jsx';
+import {Button} from '../Templates/Buttons.jsx';
+import {Cost, Tier} from '../Templates/TextFields.jsx';
 
 export const SessionDisplayItem = ({item}) => {
-  console.log(item.upgrades);
+  var {name, upgrades, cost, tier} = item;
+  console.log(item);
   return (
   <Component className="flex col">
-    {item.name}<br/>
-    Cost: {item.cost}
-    {item.upgrades.map(upgrade => <ShortUpgrade upgrade={upgrade}/>)}
+    {name}<br/>
+    <Cost cost={cost}/>
+    <Tier tier={tier}/>
+    {upgrades.map(upgrade => <ShortUpgrade upgrade={upgrade}/>)}
   </Component>
 )};
+
+const Component = style(Button)`
+  width: auto;
+  text-align: left;
+  font-size: 1.2rem;
+  border-top: 2px solid lightgray;
+
+  h5 {
+    font-family: var(--font);
+    font-size: 1rem;
+  }
+`;
 
 const ShortUpgrade = ({upgrade}) => (
   <h5>{upgrade.name}x{upgrade.applications}</h5>
 )
 
-const Component = style(NavButton)`
-  text-align: left;
-  font-size: 1.2rem;
-  border-radius: 5px;
+// const Component = style(NavButton)`
+//   text-align: left;
+//   font-size: 1.2rem;
+//   border: none;
 
-  h5 {
-    font-family: var(--fonts);
-    font-size: 1rem;
-  }
+//   border-top: 2px solid lightgray;
 
-  &:hover {
-    border: 3px solid black;
-    color: white;
-  }
-`;
+//   h5 {
+//     font-family: var(--font);
+//     font-size: 1rem;
+//   }
+
+//   &:hover {
+//     border: 3px solid black;
+//     color: white;
+//   }
+// `;

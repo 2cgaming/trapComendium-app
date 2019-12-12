@@ -4,23 +4,44 @@ import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 
 import UpgradeList from './UpgradeList.jsx';
-import {TierTable} from './Tiers.jsx';
+import {TierTable as Tiers} from './Tiers.jsx';
 import {GrayButton} from '../Templates/Buttons.jsx';
+import {Cost} from '../Templates/TextFields.jsx';
 
 const Component = ({component, match, addToSession}) => {
-  const {type, name, text, cost, params} = component;
-  var [chosen, upgradesHandler] = useState(component.upgrades || []);
+  const {type, name, text, cost, tiers} = component;
+  var [upgrades, uHandler] = useState(component.upgrades || []);
+
+  const handleUpgrades = (e, upgrade) => {
+    var applications = e.target.value;
+    if (applications === 0) {
+      uHandler(upgrades.filter(u => u.id == upgrade.id));
+    } else {
+      var index = upgrades.findIndex(u => u.id == upgrade.id);
+      if (index === -1) {
+        var newUpgrade = Object.create(upgrade);
+        newUpgrade.applications = applications;
+        uHandler([...upgrades, newUpgrade])
+      } else {
+        upgrades[index].applications = applications;
+        uHandler(upgrades)
+      }
+    }
+  }
   // var [totalCost, updateCost] = useState(component.cost || 0)
+  var [tier, tierHandler] = useState(component.tier || 1)
 
   return (
     <ComponentWrapper className="col">
       <h3>{name}</h3>
-      {cost !== undefined ? <h5><strong>Cost: </strong>{cost}</h5> : null}
+      <Cost cost={cost}/>
       <TextBox>{text}</TextBox>
-      {params ? <TierTable tiers={tiers}/> : null}
-      {<UpgradeList type={type} item_id={match.item_id} chosen={chosen} handler={upgradesHandler}/>}
+      <Tiers tiers={tiers} tierNum={tier} handler={tierHandler}/>
+      {<UpgradeList type={type} item_id={match.params.item_id} handler={handleUpgrades}/>}
       {/* <TotalCost cost={cost}/> */}
-      <Link to="/build" onClick={() => addToSession(component, chosen)}>CLICK TO ADD</Link>
+      <Link to="/build" onClick={() => addToSession(component, upgrades, tier)}>
+        <GrayButton>Add</GrayButton>
+      </Link>
     </ComponentWrapper>
   )
 }
@@ -42,13 +63,14 @@ const ComponentWrapper = style.div`
   align-items: center;
   overflow-y: scroll;
 
-  table {
-    font-size: 1.2em;
-    margin: 1em auto 0 auto;
-  }
-
   > * {
     padding-top: 1rem;
+  }
+  input {
+    border: 2px solid gray;
+    padding-left: 4px;
+    font-family: inherit;
+    font-size: inherit;
   }
 `;
 
@@ -62,14 +84,15 @@ const mapStateToProps = ({components}, props) => {
   const {item_id} = props.match.params;
 
   // note loose equality
-  const component = components.find(comp => comp._id == item_id);
+  const component = components.find(comp => comp.id == item_id);
 
   return {component};
 };
 
 const mapActionsToProps = dispatcher => {
-  const addToSession = (component, upgrades) => {
+  const addToSession = (component, upgrades, tier) => {
     component.upgrades = upgrades;
+    if (component.type === 'effect') component.tier = tier;
     dispatcher({type: 'ADD_TO_SESSION', component});
   }
   return {addToSession};

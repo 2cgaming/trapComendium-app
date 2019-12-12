@@ -10,6 +10,7 @@ export default function trapsReducer(
   if (type === 'ADD_TRAP') {
     var newState = Array.from(state)
     newState.push(trap)
+    localStorage.setItem('trap_compendium_traps', JSON.stringify(newState));
     return newState;
   }
   return state;

@@ -1,10 +1,9 @@
 import style from 'styled-components';
 
 export const Button = style.div`
-width: fit-content;
+  width: fit-content;
   padding: 15px;
   margin: 10px auto;
-  font: var(--fonts);
   font-size: 1.5rem;
   font-family: var(--font-accent);
   text-align: center;
@@ -50,29 +49,32 @@ border: 3px solid #b6b4b4;
   }`;
 
 export const ReturnButton = style.div`
-  background: lightgray;
-  color: gray;
   width: fit-content;
+  padding: 3px 6px;
+  background: lightgray;
   border: none;
   color: white;
-  width: 3em;
-  text-align: center;`;
+  font-size:1.2rem;`;
 
 export const FinalizeButton = style(Button)`
   color: gray;
   background: #b6b4b4;
   border: 3px solid #b6b4b4;
   &:hover {
-    pointer-events: none;
+    color: gray;
+    background: #b6b4b4;
+    border: 3px solid #b6b4b4;
+    cursor: default;
   }
   ${props => {
     return props.isComplete
-      ? `background: white;
-      border: 3px solid black;
+      ? `color: black;
+      background: white;
+      border: 3px solid var(--primary-color);
       &:hover {
-        background-color: var(--primary-color-hover);
-        border-color: black;
-        color: white;
+        background: white;
+        border-color: var(--primary-color-hover);
+        color: var(--primary-color-hover);
       }`
       : ''
   }}
